@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Свадьба София & Павел</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+    --primary: #F8F0E5;  /* Основной фон */
+    --secondary: #EADBC8; /* Акценты */
+    --accent: #DAC0A3;    /* Кнопки и ховеры */
+    --text: #3A3845;      /* Текст */
+}
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Playfair Display', serif;
+            background-color: var(--beige);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .animate {
+            animation: fadeIn 1s ease-out forwards;
+            opacity: 0;
+        }
+
+        header {
+            background: linear-gradient(rgba(245, 235, 224, 0.9), rgba(245, 235, 224, 0.9)),
+                        url('https://example.com/header-bg.jpg') center/cover;
+            padding: 2rem 1rem;
+            text-align: center;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 2rem;
+            color: var(--text);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            margin: 2rem 0;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text);
+            text-decoration: none;
+            font-size: 1.2rem;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+        }
+
+        nav a:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        section {
+            padding: 4rem 1rem;
+            margin: 2rem 0;
+            background: white;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        #countdown {
+            font-size: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+            padding: 1rem;
+            background: var(--dark-beige);
+            border-radius: 10px;
+        }
+
+        .rsvp-btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .rsvp-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 768px) {
+    h1 {
+        font-size: 2.2rem;
+        line-height: 1.2;
+    }
+
+    nav {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    section {
+        padding: 2rem 1rem;
+        margin: 1rem 0;
+    }
+
+    #countdown {
+        font-size: 1.5rem;
+        padding: 0.8rem;
+    }
+
+    iframe {
+        height: 200px;
+    }
+}
+
+/* Плавное появление элементов */
+@keyframes slideUp {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Дрожание сердца в футере */
+@keyframes heartbeat {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+}
+
+.animate-section {
+    animation: slideUp 0.8s ease-out forwards;
+    opacity: 0;
+}
+
+.heart {
+    animation: heartbeat 1.5s infinite;
+}
+    </style>
+</head>
+<body>
+    <header class="animate">
+        <h1>София & Павел</h1>
+        <p>3 Августа 2025</p>
+        <nav>
+            <a href="#about">Наша история</a>
+            <a href="#details">Детали</a>
+            <a href="#rsvp">RSVP</a>
+        </nav>
+    </header>
+
+    <section id="about" class="animate">
+        <h2>Наша история</h2>
+        <p>Судьба свела нас вместе в самый неожиданный момент... Теперь мы хотим разделить наше счастье с вами!</p>
+    </section>
+
+    <section id="details" class="animate">
+        <h2>Детали мероприятия</h2>
+        <div id="countdown"></div>
+        <p>Место: Усадьба «Белая Роза», Москва</p>
+        <iframe 
+            src="https://www.google.com/maps/embed?pb=..." 
+            width="100%" 
+            height="300" 
+            style="border:0; margin-top: 1rem;" 
+            allowfullscreen>
+        </iframe>
+    </section>
+
+    <section id="rsvp" class="animate">
+        <h2>Подтвердите участие</h2>
+        <a href="#rsvp-form" class="rsvp-btn">Подтвердить присутствие</a>
+    </section>
+
+    <footer>
+        <p>С любовью, София & Павел ❤️</p>
+    </footer>
+
+    <script>
+        // Таймер
+        const weddingDate = new Date('2025-08-03').getTime();
+        
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const diff = weddingDate - now;
+            
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            
+            document.getElementById('countdown').innerHTML = `
+                До свадьбы осталось:<br>
+                ${days} дней ${hours} часов ${minutes} минут
+            `;
+        }
+        
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Анимации при скролле
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.animate').forEach((el) => observer.observe(el));
+    </script>
+</body>
+</html>
